@@ -29,23 +29,6 @@ def dev_requirements(ctx: Context) -> None:
     """Install development requirements."""
     ctx.run('pip install -e .["dev"]', echo=True, pty=not WINDOWS)
 
-# Project commands
-@task
-def preprocess_data(ctx: Context) -> None:
-    """Preprocess data."""
-    ctx.run(f"python src/{PROJECT_NAME}/data.py data/raw data/processed", echo=True, pty=not WINDOWS)
-
-@task
-def train(ctx: Context) -> None:
-    """Train model."""
-    ctx.run(f"python src/{PROJECT_NAME}/train.py", echo=True, pty=not WINDOWS)
-
-@task
-def test(ctx: Context) -> None:
-    """Run tests."""
-    ctx.run("coverage run -m pytest tests/", echo=True, pty=not WINDOWS)
-    ctx.run("coverage report -m -i", echo=True, pty=not WINDOWS)
-
 @task
 def docker_build(ctx: Context, progress: str = "plain") -> None:
     """Build docker images."""
