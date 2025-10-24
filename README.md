@@ -168,8 +168,6 @@ src/
 
 🐍 Python projects using `pyproject.toml`
 
-🔥 Models in [Pytorch](https://pytorch.org/)
-
 📦 Containerized using [Docker](https://www.docker.com/)
 
 📄 Documentation with [Material Mkdocs](https://squidfunk.github.io/mkdocs-material/)
