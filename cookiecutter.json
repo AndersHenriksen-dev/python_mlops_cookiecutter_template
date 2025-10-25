@@ -1,6 +1,7 @@
 {
   "repo_name": "repo_name",
   "project_name": "project_name",
+  "coverage_dir": "src/{{ cookiecutter.project_name }}",
   "project_structure": ["advance", "simple"],
   "deps_manager": ["pip", "uv"],
   "author_name": "Your name (or your organization/company/team)",
