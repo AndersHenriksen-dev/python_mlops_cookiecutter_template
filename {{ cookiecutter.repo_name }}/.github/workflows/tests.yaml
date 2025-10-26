@@ -35,5 +35,5 @@ jobs:
 
       - name: Run tests & coverage
         run: |
-          coverage run --source="{{ cookiecutter.coverage_dir }}" -m pytest tests/
+          coverage run --source="src/" -m pytest tests/
           coverage report -m
