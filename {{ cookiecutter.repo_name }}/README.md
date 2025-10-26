@@ -9,11 +9,14 @@ The directory structure of the project looks like this:
 ├── .github/                  # Github actions and dependabot
 │   ├── dependabot.yaml
 │   └── workflows/
+│       ├── linting.yaml
+│       ├── pre-commit-update.yaml
+│       ├── deploy.yaml       # if aws is chosen
 │       └── tests.yaml
+
 ├── configs/                  # Configuration files
+├── logs/                     # Log outputs, if logging is chosen
 ├── data/                     # Data directory
-│   ├── processed
-│   └── raw
 ├── dockerfiles/              # Dockerfiles
 │   ├── api.Dockerfile
 │   └── train.Dockerfile
@@ -21,24 +24,21 @@ The directory structure of the project looks like this:
 │   ├── mkdocs.yml
 │   └── source/
 │       └── index.md
-├── models/                   # Trained models
 ├── notebooks/                # Jupyter notebooks
+├── infra/                    # deployment infrastrucure, if aws is chosen
+│   ├── terraform
+│       ├── main.tf
+│       ├── outputs.tf
+│       └── variables.tf
 ├── reports/                  # Reports
 │   └── figures/
 ├── src/                      # Source code
 │   ├── project_name/
 │   │   ├── __init__.py
-│   │   ├── api.py
-│   │   ├── data.py
-│   │   ├── evaluate.py
-│   │   ├── models.py
-│   │   ├── train.py
-│   │   └── visualize.py
+│   │   └── main.py
 └── tests/                    # Tests
 │   ├── __init__.py
-│   ├── test_api.py
-│   ├── test_data.py
-│   └── test_model.py
+│   ├── test_file.py
 ├── .gitignore
 ├── .pre-commit-config.yaml
 ├── LICENSE
@@ -50,6 +50,5 @@ The directory structure of the project looks like this:
 ```
 
 
-Created using [mlops_template](https://github.com/SkafteNicki/mlops_template),
-a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting
-started with Machine Learning Operations (MLOps).
+Created using [python mlops template](https://github.com/AndersHenriksen-dev/python_mlops_cookiecutter_template),
+a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting started with python and CI/CD.

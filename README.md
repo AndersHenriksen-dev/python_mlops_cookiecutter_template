@@ -1,8 +1,7 @@
 # 🍪 A up-to-date Cookiecutter template for MLOps
 
-Inspired by the original [cookiecutter-data-science](https://cookiecutter-data-science.drivendata.org/v1/) template.
-This template is more opinionated regarding tools used. It has been updated to better fit machine learning-based
-projects and is being used as the core template in this [MLOps course](https://github.com/SkafteNicki/dtu_mlops).
+Inspired by the original [cookiecutter-data-science](https://cookiecutter-data-science.drivendata.org/v1/) template and [Nicky Skafte's mlops_template](https://github.com/SkafteNicki/mlops_template).
+This setup is made very specific to the needs of myself and data scientists with a lot of CI/CD work and time spent making packages. Where possible, the tooling from the [MLOps course](https://github.com/SkafteNicki/dtu_mlops) is used.
 
 ## ✋ Requirements to use the template:
 
@@ -20,26 +19,34 @@ gh repo create <repo_name> --public --confirm
 Afterwards on your local machine run
 
 ```bash
-cookiecutter https://github.com/SkafteNicki/mlops_template
+cookiecutter https://github.com/AndersHenriksen-dev/python_mlops_cookiecutter_template
 ```
 
 You will be prompted with the following questions:
 
 ```txt
-    [1/8] repo_name (repo_name):
-    [2/8] project_name (project_name):
-    [3/8] Select project_structure
+    [1/10] repo_name (repo_name):
+    [2/10] project_name (project_name):
+    [3/10] Select project_structure
         1 - advance
         2 - simple
         Choose from [1/2] (1):
-    [4/8] Select deps_manager
+    [4/10] Select deps_manager
         1 - pip
         2 - uv
         Choose from [1/2] (1):
-    [5/8] author_name (Your name (or your organization/company/team)):
-    [6/8] description (A short description of the project.):
-    [7/8] python_version (3.12):
-    [8/8] Select open_source_license
+    [5/10] Select use_aws
+        1 - aws
+        2 - none
+        Choose from [1/2] (1):
+    [6/10] Select use_logging
+        1 - y
+        2 - n
+        Choose from [1/2] (1):
+    [7/10] author_name (Your name (or your organization/company/team)):
+    [8/10] description (A short description of the project.):
+    [9/10] python_version (3.12):
+    [10/10] Select open_source_license
         1 - No license file
         2 - MIT
         3 - BSD-3-Clause
@@ -77,91 +84,47 @@ Assuming you choose the `advance` structure and `uv` as the dependency manager, 
 something like this:
 
 ```txt
-├── configs
-│   └── .gitkeep
-├── .devcontainer
-│   ├── devcontainer.json
-│   └── postCreateCommand.sh
-├── dockerfiles
-│   ├── api.dockerfile
-│   └── train.dockerfile
-├── docs
-│   ├── mkdocs.yaml
-│   ├── README.md
-│   └── source
-│       └── index.md
-├── .github
+├── .github/                  # Github actions and dependabot
 │   ├── dependabot.yaml
-│   └── workflows
+│   └── workflows/
 │       ├── linting.yaml
 │       ├── pre-commit-update.yaml
+│       ├── deploy.yaml       # if aws is chosen
 │       └── tests.yaml
-├── .gitignore
-├── LICENSE
-├── models
-│   └── .gitkeep
-├── notebooks
-│   └── .gitkeep
-├── .pre-commit-config.yaml
-├── pyproject.toml
-├── .python-version
-├── README.md
-├── reports
-│   ├── figures
-│   │   └── .gitkeep
-│   └── .gitkeep
-├── src
-│   └── project_name
-│       ├── api.py
-│       ├── data.py
-│       ├── evaluate.py
-│       ├── __init__.py
-│       ├── model.py
-│       ├── train.py
-│       └── visualize.py
-├── tasks.py
-├── tests
+
+├── configs/                  # Configuration files
+├── logs/                     # Log outputs, if logging is chosen
+├── data/                     # Data directory
+├── dockerfiles/              # Dockerfiles
+│   ├── api.Dockerfile
+│   └── train.Dockerfile
+├── docs/                     # Documentation
+│   ├── mkdocs.yml
+│   └── source/
+│       └── index.md
+├── notebooks/                # Jupyter notebooks
+├── infra/                    # deployment infrastrucure, if aws is chosen
+│   ├── terraform
+│       ├── main.tf
+│       ├── outputs.tf
+│       └── variables.tf
+├── reports/                  # Reports
+│   └── figures/
+├── src/                      # Source code
+│   ├── project_name/
+│   │   ├── __init__.py
+│   │   └── main.py
+└── tests/                    # Tests
 │   ├── __init__.py
-│   ├── test_api.py
-│   ├── test_data.py
-│   └── test_model.py
-└── uv.lock
-```
-
-In particular lets explain the structure of the `src` folder as that is arguably the most important part of the
-repository. The `src` folder is where the main code of the project is stored. The template divides the code into five
-files, shown in the diagram below with their respective connections:
-
-<img src="diagram.drawio.png" alt="diagram" width="1000"/>
-
-* `data.py`: this file is responsible for everything related to the data. This includes loading, cleaning, and splitting
-    the data. If the data needs to be pre-processed then running this file should process raw data in the `data/raw`
-    folder and save the processed data in the `data/processed` folder.
-* `model.py`: this file contains one or model definitions.
-* `train.py`: this file is responsible for training the model. It should import the training/validation data interface
-    from `data.py` and the model definition from `model.py`.
-* `evaluate.py`: this file is responsible for evaluating the model. It should import the test data interface from
-    `data.py` and load the trained model from the `models` folder. Output should be performance metrics of the trained
-    model.
-* `api.py`: this file is responsible for serving the model. It should import the trained model from the `models` folder
-    and provide an interface for making predictions.
-* `visualize.py`: this file is responsible for visualizing the data and model. It should import the training/validation/
-    test data interface from `data.py` and the trained model from the `models` folder. Output should be visualizations
-    of the data and model.
-
-At some point one or more of the files may have grown too large and complicated. At this point it is recommended to
-split the file into multiple files and move into a folder of the same name. As an example consider the `model.py`
-containing many models. In this case it would be a good idea to refactor into
-
-```txt
-src/
-└── project_name/
-    ├── __init__.py
-    ├── models/
-    │   ├── __init__.py
-    │   ├── model1.py
-    │   └── model2.py
-    ├── ...
+│   ├── test_file.py
+├── .gitignore
+├── .pre-commit-config.yaml
+├── LICENSE
+├── pyproject.toml            # Python project file
+├── README.md                 # Project README
+├── requirements.txt          # Project requirements
+├── requirements_dev.txt      # Development requirements
+└── tasks.py                  # Project tasks
 ```
 
 ## 📚 The stack
@@ -182,11 +145,17 @@ src/
 
 📝 Project tasks using [Invoke](https://www.pyinvoke.org/)
 
+☁️ Cloud infrastructure with [AWS](https://aws.amazon.com/)
+
+📜 Infrastructure as code with [Terraform](https://www.terraform.io/)
+
+📝 Logging with standard Python logging or preferred libraries
+
 and probably more that I have forgotten...
 
 ## ❕ License
 
-If you enjoy using the template, please consider giving credit by citing it.
+If you enjoy using this template, please consider giving credit to Nicki Skafte by citing the original.
 You can use the following BibTeX entry:
 
 ```bibtex
