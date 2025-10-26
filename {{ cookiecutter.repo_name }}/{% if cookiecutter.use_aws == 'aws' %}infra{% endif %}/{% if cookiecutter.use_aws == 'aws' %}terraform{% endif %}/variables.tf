@@ -5,12 +5,6 @@ variable "project_name" {
   default     = "{{ cookiecutter.project_name }}"
 }
 
-variable "project_name" {
-  description = "Human-readable repo name"
-  type        = string
-  default     = "{{ cookiecutter.repo_name }}"
-}
-
 # Environment configuration
 variable "environment" {
   description = "Deployment environment (e.g. dev, staging, prod)"
