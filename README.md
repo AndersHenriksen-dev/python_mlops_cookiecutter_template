@@ -155,10 +155,16 @@ and probably more that I have forgotten...
 
 ## ❕ License
 
-If you enjoy using this template, please consider giving credit to Nicki Skafte by citing the original.
-You can use the following BibTeX entry:
+If you enjoy using this template, please consider giving credit to myself and Nicki Skafte by citing this project and the original.
+You can use the following BibTeX entries:
 
 ```bibtex
+@misc{skafte_mlops_template,
+    author       = {Anders Henriksen},
+    title        = {Python MLOps Cookiecutter Template},
+    howpublished = {\url{https://github.com/AndersHenriksen-dev/python_mlops_cookiecutter_template}},
+    year         = {2025}
+}
 @misc{skafte_mlops_template,
     author       = {Nicki Skafte Detlefsen},
     title        = {MLOps template},
