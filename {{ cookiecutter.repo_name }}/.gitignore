@@ -180,6 +180,4 @@ cython_debug/
 # folders not to push
 notebooks/
 data/
-{% if cookiecutter.use_logging == 'y' %}
-logs/
-{% endif %}
+{% if cookiecutter.use_logging == 'y' %}logs/{% endif %}
