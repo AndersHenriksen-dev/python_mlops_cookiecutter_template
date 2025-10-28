@@ -1,8 +1,16 @@
-
-
-if __name__ == "__main__":
 {% if cookiecutter.use_logging == 'y' %}
-    from utils.logger import get_logger
+from utils.logging import (
+    get_logger,
+    log_function_execution,
+    setup_logging,
+)
+
+logger = get_logger(__name__)
+
+@log_function_execution
+def main():
+
+    setup_logging()    
 
     log = get_logger(__name__)
 
@@ -10,4 +18,14 @@ if __name__ == "__main__":
     log.debug("Debugging connection issue...")
     log.warning("Low disk space.")
     log.error("Failed to save file!")
+
+
+if __name__ == "__main__":
+    main()
+{% else %}
+def main():
+    print("Hello world!")
+
+if __name__ == "__main__":
+    main()
 {% endif %}
