@@ -1,7 +1,6 @@
 {
   "repo_name": "repo_name",
   "project_name": "project_name",
-  "project_structure": ["advance", "simple"],
   "deps_manager": ["pip", "uv"],
   "use_aws": ["aws", "none"],
   "use_logging": ["y", "n"],

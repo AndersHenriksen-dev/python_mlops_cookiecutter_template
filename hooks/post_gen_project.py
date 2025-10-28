@@ -47,16 +47,6 @@ if not (ge(python_version, min_version) and le(python_version, max_version)):
         " You can read more about Python versioning here: https://devguide.python.org/versions/",
     )
 
-# Remove unnecessary files and folders for the simple template
-if project_structure == "simple":
-    logger.info("Removing unnecessary files and folders for the simple template.")
-    folder_and_files_to_remove = [
-        ".github", ".devcontainer", "dockerfiles", "docs",
-    ]
-    for f in folder_and_files_to_remove:
-        if Path(f).exists():
-            shutil.rmtree(f)
-
 # Rename files and folders for the uv template
 if deps_manager == "uv":
     logger.info("Renaming files and folders for the uv template.")
@@ -66,13 +56,12 @@ if deps_manager == "uv":
     Path("pyproject_uv.toml").rename("pyproject.toml")
     Path("tasks_pip.py").unlink()
     Path("tasks_uv.py").rename("tasks.py")
-    if project_structure == "advance":
-        Path("dockerfiles/api_pip.dockerfile").unlink()
-        Path("dockerfiles/api_uv.dockerfile").rename("dockerfiles/api.dockerfile")
-        Path("dockerfiles/train_pip.dockerfile").unlink()
-        Path("dockerfiles/train_uv.dockerfile").rename("dockerfiles/train.dockerfile")
-        Path(".devcontainer/post_create_pip.sh").unlink()
-        Path(".devcontainer/post_create_uv.sh").rename(".devcontainer/post_create.sh")
+    Path("dockerfiles/api_pip.dockerfile").unlink()
+    Path("dockerfiles/api_uv.dockerfile").rename("dockerfiles/api.dockerfile")
+    Path("dockerfiles/train_pip.dockerfile").unlink()
+    Path("dockerfiles/train_uv.dockerfile").rename("dockerfiles/train.dockerfile")
+    Path(".devcontainer/post_create_pip.sh").unlink()
+    Path(".devcontainer/post_create_uv.sh").rename(".devcontainer/post_create.sh")
 
 if deps_manager == "pip":
     logger.info("Renaming files and folders for the pip template.")
@@ -80,10 +69,9 @@ if deps_manager == "pip":
     Path("pyproject_pip.toml").rename("pyproject.toml")
     Path("tasks_uv.py").unlink()
     Path("tasks_pip.py").rename("tasks.py")
-    if project_structure == "advance":
-        Path("dockerfiles/api_uv.dockerfile").unlink()
-        Path("dockerfiles/api_pip.dockerfile").rename("dockerfiles/api.dockerfile")
-        Path("dockerfiles/train_uv.dockerfile").unlink()
-        Path("dockerfiles/train_pip.dockerfile").rename("dockerfiles/train.dockerfile")
-        Path(".devcontainer/post_create_uv.sh").unlink()
-        Path(".devcontainer/post_create_pip.sh").rename(".devcontainer/post_create.sh")
+    Path("dockerfiles/api_uv.dockerfile").unlink()
+    Path("dockerfiles/api_pip.dockerfile").rename("dockerfiles/api.dockerfile")
+    Path("dockerfiles/train_uv.dockerfile").unlink()
+    Path("dockerfiles/train_pip.dockerfile").rename("dockerfiles/train.dockerfile")
+    Path(".devcontainer/post_create_uv.sh").unlink()
+    Path(".devcontainer/post_create_pip.sh").rename(".devcontainer/post_create.sh")

@@ -11,11 +11,6 @@ jobs:
   setup:
     name: Template generation
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        project_structure: ["simple", "advance"]
-        project_manager: ["pip", "uv"]
-      fail-fast: false
     steps:
       - uses: actions/checkout@v4
 
@@ -33,28 +28,27 @@ jobs:
 
       - name: Execute template
         run: |
-          invoke template \
-            --project-structure=${{ matrix.project_structure }} --project-manager=${{ matrix.project_manager }}
+          invoke template --project-manager=pip
+          invoke template --project-manager=uv
 
       - name: Generated tree structure
         run: |
-          tree -a ${{ matrix.project_structure }}_${{ matrix.project_manager }}_repo
+          tree -a pip_repo
+          tree -a uv_repo
 
-      - name: Upload generated template
+      - name: Upload generated templates
         uses: actions/upload-artifact@v4
         with:
-          name: generated-template-${{ matrix.project_structure }}-${{ matrix.project_manager }}
-          path: ${{ matrix.project_structure }}_${{ matrix.project_manager }}_repo
+          name: generated-template
+          path: |
+            pip_repo
+            uv_repo
           include-hidden-files: true
 
   pip-project:
     name: Project using pip
     needs: setup
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        project_structure: ["simple", "advance"]
-      fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
@@ -62,12 +56,11 @@ jobs:
       - name: Download generated template
         uses: actions/download-artifact@v4
         with:
-          name: generated-template-${{ matrix.project_structure }}-pip
-          path: ${{ matrix.project_structure }}_pip_repo
+          name: generated-template
+          path: pip_repo
 
       - name: Artifact structure
-        run: |
-          tree -a ${{ matrix.project_structure }}_pip_repo
+        run: tree -a pip_repo
 
       - name: Install conda
         uses: conda-incubator/setup-miniconda@v3
@@ -77,7 +70,7 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          cd ${{ matrix.project_structure }}_pip_repo
+          cd pip_repo
           pip install invoke
           invoke create-environment
           invoke requirements
@@ -87,12 +80,12 @@ jobs:
 
       - name: List all project commands
         run: |
-          cd ${{ matrix.project_structure }}_pip_repo
+          cd pip_repo
           invoke --list
 
       - name: Run project commands
         run: |
-          cd ${{ matrix.project_structure }}_pip_repo
+          cd pip_repo
           invoke preprocess-data
           invoke train
           invoke test
@@ -100,25 +93,22 @@ jobs:
           TERM: xterm
 
       - name: Build documentation
-        if: ${{ matrix.project_structure == 'advance' }}
         run: |
-          cd ${{ matrix.project_structure }}_pip_repo
+          cd pip_repo
           invoke build-docs
         env:
           TERM: xterm
 
       - name: Build dockerfiles
-        if: ${{ matrix.project_structure == 'advance' }}
         run: |
-          cd ${{ matrix.project_structure }}_pip_repo
+          cd pip_repo
           invoke docker-build
         env:
           TERM: xterm
 
       - name: Check devcontainer
-        if: ${{ matrix.project_structure == 'advance' }}
         run: |
-          cd ${{ matrix.project_structure }}_pip_repo
+          cd pip_repo
           npx @devcontainers/cli build --workspace-folder .
           npx @devcontainers/cli up --workspace-folder .
         env:
@@ -128,10 +118,6 @@ jobs:
     name: Project using uv
     needs: setup
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        project_structure: ["simple", "advance"]
-      fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
@@ -139,29 +125,28 @@ jobs:
       - name: Download generated template
         uses: actions/download-artifact@v4
         with:
-          name: generated-template-${{ matrix.project_structure }}-uv
-          path: ${{ matrix.project_structure }}_uv_repo
+          name: generated-template-advance
+          path: uv_repo
 
       - name: Artifact structure
-        run: |
-          tree -a ${{ matrix.project_structure }}_uv_repo
+        run: tree -a uv_repo
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
 
       - name: Install project dependencies
         run: |
-          cd ${{ matrix.project_structure }}_uv_repo
+          cd uv_repo
           uv sync --all-extras --dev
 
       - name: List all project commands
         run: |
-          cd ${{ matrix.project_structure }}_uv_repo
+          cd uv_repo
           uv run invoke --list
 
       - name: Run project commands
         run: |
-          cd ${{ matrix.project_structure }}_uv_repo
+          cd uv_repo
           uv run invoke preprocess-data
           uv run invoke train
           uv run invoke test
@@ -169,25 +154,22 @@ jobs:
           TERM: xterm
 
       - name: Build documentation
-        if: ${{ matrix.project_structure == 'advance' }}
         run: |
-          cd ${{ matrix.project_structure }}_uv_repo
+          cd uv_repo
           uv run invoke build-docs
         env:
           TERM: xterm
 
       - name: Build dockerfiles
-        if: ${{ matrix.project_structure == 'advance' }}
         run: |
-          cd ${{ matrix.project_structure }}_uv_repo
+          cd uv_repo
           uv run invoke docker-build
         env:
           TERM: xterm
 
       - name: Check devcontainer
-        if: ${{ matrix.project_structure == 'advance' }}
         run: |
-          cd ${{ matrix.project_structure }}_uv_repo
+          cd uv_repo
           npx @devcontainers/cli build --workspace-folder .
           npx @devcontainers/cli up --workspace-folder .
         env:
