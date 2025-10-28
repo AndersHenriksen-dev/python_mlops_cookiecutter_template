@@ -15,12 +15,10 @@ except ImportError:
 
 project_name = "{{cookiecutter.project_name}}"
 python_version = "{{cookiecutter.python_version}}"
-project_structure = "{{cookiecutter.project_structure}}"
 deps_manager = "{{cookiecutter.deps_manager}}"
 
 logger.info(f"Project name: {project_name}")
 logger.info(f"Python version: {python_version}")
-logger.info(f"Project structure: {project_structure}")
 logger.info(f"Dependencies manager: {deps_manager}")
 
 if not project_name.isidentifier() or not project_name.islower():
