@@ -2,6 +2,8 @@ default_context:
     repo_name: "uv_repo"
     project_name: "project_name"
     deps_manager: "uv"
+    use_aws: "aws"
+    use_logging: "y"
     author_name: "author_name"
     description: "description"
     python_version: "3.12"

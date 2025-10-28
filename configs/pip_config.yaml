@@ -1,7 +1,9 @@
 default_context:
-    repo_name: "advance_pip_repo"
+    repo_name: "pip_repo"
     project_name: "project_name"
     deps_manager: "pip"
+    use_aws: "aws"
+    use_logging: "y"
     author_name: "author_name"
     description: "description"
     python_version: "3.12"
