@@ -12,6 +12,9 @@ jobs:
   format:
     name: Check code formatting
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["{{ cookiecutter.python_version }}"]  # Add more versions if desired
 
     steps:
       - name: Checkout code

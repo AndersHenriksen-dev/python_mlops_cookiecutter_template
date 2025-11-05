@@ -4,7 +4,9 @@
     setup_logging,
 )
 
+
 logger = get_logger(__name__)
+
 
 @log_function_execution
 def main():
