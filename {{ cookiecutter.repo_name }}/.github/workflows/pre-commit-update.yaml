@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         operating-system: ["ubuntu-latest"]
-        python-version: ['{{"{{ cookiecutter.python_version }}"}}']
+        python-version: ["PLACEHOLDER_FOR_PYTHON_VERSION"]
 
     runs-on: ${{ matrix.operating-system }}
 
