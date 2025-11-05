@@ -78,9 +78,14 @@ if deps_manager == "pip":
 logger.info("Setting the correct python version in .github/workflows.")
 project_dir = Path.cwd()  # This is the generated project root
 
-# Path to the script
-script_path = project_dir / "replace_placeholders.sh"
+workflow_dir = Path(project_dir / ".github" / "workflows")
 
-# Ensure it exists and is executable
-if script_path.exists():
-    subprocess.run(["bash", str(script_path), str(project_dir / ".github" / "workflows")], check=True)
+placeholders = {
+    "PLACEHOLDER_FOR_PYTHON_VERSION": "{{ cookiecutter.python_version }}"
+}
+
+for file_path in workflow_dir.glob("*.yaml"):
+    text = file_path.read_text()
+    for key, val in placeholders.items():
+        text = text.replace(key, val)
+    file_path.write_text(text)
