@@ -1,6 +1,7 @@
 from keyword import iskeyword
 from operator import ge, le
-import shutil
+from pathlib import Path
+import subprocess
 from pathlib import Path
 
 try:
@@ -73,3 +74,13 @@ if deps_manager == "pip":
     Path("dockerfiles/train_pip.dockerfile").rename("dockerfiles/train.dockerfile")
     Path(".devcontainer/post_create_uv.sh").unlink()
     Path(".devcontainer/post_create_pip.sh").rename(".devcontainer/post_create.sh")
+
+logger.info("Setting the correct python version in .github/workflows.")
+project_dir = Path.cwd()  # This is the generated project root
+
+# Path to the script
+script_path = project_dir / "replace_placeholders.sh"
+
+# Ensure it exists and is executable
+if script_path.exists():
+    subprocess.run(["bash", str(script_path), str(project_dir / ".github" / "workflows")], check=True)
