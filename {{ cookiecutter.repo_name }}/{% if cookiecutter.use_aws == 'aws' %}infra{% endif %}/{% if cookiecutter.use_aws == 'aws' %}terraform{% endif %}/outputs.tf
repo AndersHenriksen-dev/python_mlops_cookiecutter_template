@@ -1,9 +1,7 @@
-output "s3_bucket_name" {
-  description = "Name of the S3 bucket created"
-  value       = aws_s3_bucket.project_bucket.bucket
+output "project_name" {
+  value = var.project_name
 }
 
-output "region" {
-  description = "AWS region used for deployment"
-  value       = var.aws_region
+output "aws_region" {
+  value = var.aws_region
 }

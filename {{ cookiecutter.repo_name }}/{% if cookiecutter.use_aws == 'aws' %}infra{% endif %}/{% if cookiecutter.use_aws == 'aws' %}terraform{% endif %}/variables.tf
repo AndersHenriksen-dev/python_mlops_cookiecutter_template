@@ -1,27 +1,17 @@
-# Project variables (templated by Cookiecutter)
 variable "project_name" {
-  description = "Human-readable project name"
   type        = string
   default     = "{{ cookiecutter.project_name }}"
+  description = "Name of the project."
 }
 
-# Environment configuration
-variable "environment" {
-  description = "Deployment environment (e.g. dev, staging, prod)"
-  type        = string
-  default     = "dev"
-}
-
-# AWS settings
 variable "aws_region" {
-  description = "AWS region to deploy resources in"
   type        = string
-  default     = "us-east-1"
+  default     = "{{ cookiecutter.aws_region }}"
+  description = "AWS region to deploy resources."
 }
 
-# 
-variable "repo_name" {
-  description = "The name of the repo"
+variable "aws_profile" {
   type        = string
-  default     = "{{ cookiecutter.repo_name }}"
+  default     = "{{ cookiecutter.aws_profile }}"
+  description = "AWS CLI profile to use."
 }
