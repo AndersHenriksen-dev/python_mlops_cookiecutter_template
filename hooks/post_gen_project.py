@@ -97,3 +97,12 @@ for root, _, files in os.walk(terraform_dir):
 
             with open(file_path, "w") as f:
                 f.write(content)
+
+git_hook_path = "python_mlops_cookiecutter_template/{{ cookiecutter.repo_name }}/hooks/pre-merge-commit.sh"
+git_hooks = [
+    Path(git_hook_path/"commit-msg.sh"),
+    Path(git_hook_path/"pre-merge-commit.sh"),
+    Path(git_hook_path/"pre-push.sh"),
+]
+for git_hook in git_hooks:
+    Path.chmod(git_hook, 0o755)
