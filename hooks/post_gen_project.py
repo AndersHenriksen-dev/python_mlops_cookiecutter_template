@@ -72,7 +72,7 @@ def replace_in_file(path, replacements) -> None:
 
 
 use_aws = "{{ cookiecutter.use_aws }}"
-project_slug = "{{ cookiecutter.project_slug }}"
+project_name = "{{ cookiecutter.project_name }}"
 aws_region = "{{ cookiecutter.aws_region }}"
 
 
@@ -82,8 +82,8 @@ terraform_dir = "infra/terraform"
 if not use_aws:
     sys.exit()
 
-aws_bucket_for_tf_state = f"{project_slug}-tf-state"
-aws_dynamodb_lock_table = f"{project_slug}-tf-locks"
+aws_bucket_for_tf_state = f"{project_name}-tf-state"
+aws_dynamodb_lock_table = f"{project_name}-tf-locks"
 
 for root, _, files in os.walk(terraform_dir):
     for file in files:
