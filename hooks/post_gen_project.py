@@ -84,7 +84,6 @@ if not use_aws:
 
 aws_bucket_for_tf_state = f"{project_slug}-tf-state"
 aws_dynamodb_lock_table = f"{project_slug}-tf-locks"
-aws_profile = "default"
 
 for root, _, files in os.walk(terraform_dir):
     for file in files:
