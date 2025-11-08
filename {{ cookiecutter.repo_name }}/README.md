@@ -52,9 +52,53 @@ The directory structure of the project looks like this:
 
 ## Setup
 
-### AWS (Optional)
-If you want to use AWS, you will need to run:
-```aws configure```
+### Software
+- Pip
+- Git
+- Python
+- Docker and Docker Desktop
+- Terraform (if you want terraform support)
+- Minikube (if you need kubernetes)
+- Kubectl (if you need kubernetes)
+
+### Git setup
+Some of these settings should always be on to get the best git experience. Others are highly controversial. To learn more, read [this blog](https://blog.gitbutler.com/how-git-core-devs-configure-git).
+
+#### Always a good idea
+```git config --global user.name "Your Name"```
+```git config --global user.email "you@example.com"```
+```git config --global core.editor "code --wait"```
+<!-- ``git config --global column.ui auto`` -->
+``git config --global branch.sort -committerdate``
+``git config --global tag.sort version:refname``
+``git config --global init.defaultBranch main``
+``git config --global diff.algorithm histogram``
+``git config --global diff.mnemonicPrefix true``
+``git config --global diff.renames true``
+``git config --global diff.colorMoved plain``
+``git config --global push.autoSetupRemote true``
+``git config --global push.default simple # (default since 2.0)``
+``git config --global push.followTags true``
+``git config --global fetch.prune true``
+``git config --global fetch.pruneTags true``
+``git config --global fetch.all true``
+
+
+#### Sometimes a good idea
+``git config --global help.autocorrect prompt``
+``git config --global commit.verbose true``
+``git config --global rerere.enabled true``
+``git config --global rerere.autoupdate true``
+``git config --global rebase.autoSquash true``
+``git config --global rebase.autoStash true``
+<!-- git config --global merge.conflictstyle zdiff3 -->
+<!-- git config --global pull.rebase true -->
+``git config --global core.fsmonitor true``
+``git config --global core.untrackedCache true``
+
+### Git Hooks
+To setup git hooks (check commit message setup, only allow rebase to feature-branches and merge to main), use the following line:
+```git config core.hooksPath hooks```
 
 ### GitHub Secrets
 
@@ -67,6 +111,11 @@ To keep your project secure, you must configure the following GitHub repository 
 You can add these in:
 
 GitHub → Settings → Secrets and variables → Actions → New repository secret
+
+
+### AWS (Optional)
+If you want to use AWS, you will need to run:
+```aws configure```
 
 
 ## Acknowledgements
