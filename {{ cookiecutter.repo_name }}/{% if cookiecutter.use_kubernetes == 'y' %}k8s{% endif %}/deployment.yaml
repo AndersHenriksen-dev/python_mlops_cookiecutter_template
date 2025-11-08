@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ cookiecutter.repo_name }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "{{ cookiecutter.repo_name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ cookiecutter.repo_name }}"
+    spec:
+      containers:
+        - name: "{{ cookiecutter.repo_name }}"
+          image: "{{ cookiecutter.repo_name }}:latest"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: ENVIRONMENT
+              value: "production"
