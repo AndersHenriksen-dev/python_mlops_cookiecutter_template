@@ -50,5 +50,26 @@ The directory structure of the project looks like this:
 ```
 
 
+## Setup
+
+### AWS (Optional)
+If you want to use AWS, you will need to run:
+```aws configure```
+
+### GitHub Secrets
+
+To keep your project secure, you must configure the following GitHub repository secrets:
+- GITHUB_TOKEN
+- TF_API_TOKEN
+- DOCKER_USERNAME
+- DOCKER_PASSWORD
+
+You can add these in:
+
+GitHub → Settings → Secrets and variables → Actions → New repository secret
+
+
+## Acknowledgements
+
 Created using [python mlops template](https://github.com/AndersHenriksen-dev/python_mlops_cookiecutter_template),
 a [cookiecutter template](https://github.com/cookiecutter/cookiecutter) for getting started with python and CI/CD.
