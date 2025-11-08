@@ -1,8 +1,6 @@
 from keyword import iskeyword
 from operator import ge, le
 from pathlib import Path
-import subprocess
-from pathlib import Path
 
 try:
     from loguru import logger
@@ -11,7 +9,7 @@ except ImportError:
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
     handler = logging.StreamHandler()
-    handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
     logger.addHandler(handler)
 
 project_name = "{{cookiecutter.project_name}}"
@@ -81,7 +79,7 @@ project_dir = Path.cwd()  # This is the generated project root
 workflow_dir = Path(project_dir / ".github" / "workflows")
 
 placeholders = {
-    "PLACEHOLDER_FOR_PYTHON_VERSION": "{{ cookiecutter.python_version }}"
+    "PLACEHOLDER_FOR_PYTHON_VERSION": "{{ cookiecutter.python_version }}",
 }
 
 for file_path in workflow_dir.glob("*.yaml"):

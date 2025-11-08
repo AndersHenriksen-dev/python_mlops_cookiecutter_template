@@ -1,4 +1,4 @@
-{% if cookiecutter.use_logging == 'y' %}from utils.logging import (
+{% if cookiecutter.use_logging == "y" %}from utils.logging import (
     get_logger,
     log_function_execution,
     setup_logging,
