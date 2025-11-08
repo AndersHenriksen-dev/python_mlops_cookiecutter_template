@@ -1,6 +1,8 @@
 from keyword import iskeyword
 from operator import ge, le
 from pathlib import Path
+import os
+import sys
 
 try:
     from loguru import logger
@@ -56,3 +58,41 @@ for file_path in workflow_dir.glob("*.yaml"):
     for key, val in placeholders.items():
         text = text.replace(key, val)
     file_path.write_text(text)
+
+
+def replace_in_file(path, replacements) -> None:
+    with open(path, "r") as f:
+        content = f.read()
+
+    for k, v in replacements.items():
+        content = content.replace(k, v)
+
+    with open(path, "w") as f:
+        f.write(content)
+
+use_aws = "{{cookiecutter.use_aws}}"
+aws_region = "{{cookiecutter.aws_region}}"
+
+aws_profile = "default"
+aws_bucket_for_tf_state = f"{project_name}-tf-state"
+aws_dynamodb_lock_table = f"{project_name}-tf-locks"
+
+terraform_dir = "infra/terraform"
+
+# Terraform setup
+if not use_aws:
+    sys.exit()
+
+for root, _, files in os.walk(terraform_dir):
+    for file in files:
+        if file.endswith(".tf"):
+            full_path = Path(root/file)
+            replace_in_file(
+                full_path,
+                {
+                    "{{ cookiecutter.aws_bucket_for_tf_state }}": aws_bucket_for_tf_state,
+                    "{{ cookiecutter.aws_dynamodb_lock_table }}": aws_dynamodb_lock_table,
+                    "{{ cookiecutter.aws_profile }}": aws_profile,
+                    "{{ cookiecutter.aws_region }}": aws_region,
+                },
+            )
