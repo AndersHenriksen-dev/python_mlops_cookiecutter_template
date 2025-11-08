@@ -78,28 +78,23 @@ aws_region = "{{ cookiecutter.aws_region }}"
 
 use_aws = use_aws.lower() == "y"
 
+terraform_dir = "infra/terraform"
 if not use_aws:
     sys.exit()
 
-# Generate Terraform values
 aws_bucket_for_tf_state = f"{project_slug}-tf-state"
 aws_dynamodb_lock_table = f"{project_slug}-tf-locks"
 aws_profile = "default"
 
-# Replace placeholders in .tf files
-terraform_dir = "infra/terraform"
 for root, _, files in os.walk(terraform_dir):
     for file in files:
         if file.endswith(".tf"):
-            file_path = Path(root/file)
+            file_path = os.path.join(root, file)
             with open(file_path, "r") as f:
                 content = f.read()
 
-            # Replace placeholders
-            content = content.replace("{{ cookiecutter.aws_bucket_for_tf_state }}", aws_bucket_for_tf_state)
-            content = content.replace("{{ cookiecutter.aws_dynamodb_lock_table }}", aws_dynamodb_lock_table)
-            content = content.replace("{{ cookiecutter.aws_profile }}", aws_profile)
-            content = content.replace("{{ cookiecutter.aws_region }}", aws_region)
+            content = content.replace("AWS_BUCKET_FOR_TF_STATE", aws_bucket_for_tf_state)
+            content = content.replace("AWS_DYNAMODB_LOCK_TABLE", aws_dynamodb_lock_table)
 
             with open(file_path, "w") as f:
                 f.write(content)
