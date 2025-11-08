@@ -70,29 +70,36 @@ def replace_in_file(path, replacements) -> None:
     with open(path, "w") as f:
         f.write(content)
 
-use_aws = "{{cookiecutter.use_aws}}"
-aws_region = "{{cookiecutter.aws_region}}"
 
-aws_profile = "default"
-aws_bucket_for_tf_state = f"{project_name}-tf-state"
-aws_dynamodb_lock_table = f"{project_name}-tf-locks"
+use_aws = "{{ cookiecutter.use_aws }}"
+project_slug = "{{ cookiecutter.project_slug }}"
+aws_region = "{{ cookiecutter.aws_region }}"
 
-terraform_dir = "infra/terraform"
 
-# Terraform setup
+use_aws = use_aws.lower() == "y"
+
 if not use_aws:
     sys.exit()
 
+# Generate Terraform values
+aws_bucket_for_tf_state = f"{project_slug}-tf-state"
+aws_dynamodb_lock_table = f"{project_slug}-tf-locks"
+aws_profile = "default"
+
+# Replace placeholders in .tf files
+terraform_dir = "infra/terraform"
 for root, _, files in os.walk(terraform_dir):
     for file in files:
         if file.endswith(".tf"):
-            full_path = Path(root/file)
-            replace_in_file(
-                full_path,
-                {
-                    "{{ cookiecutter.aws_bucket_for_tf_state }}": aws_bucket_for_tf_state,
-                    "{{ cookiecutter.aws_dynamodb_lock_table }}": aws_dynamodb_lock_table,
-                    "{{ cookiecutter.aws_profile }}": aws_profile,
-                    "{{ cookiecutter.aws_region }}": aws_region,
-                },
-            )
+            file_path = Path(root/file)
+            with open(file_path, "r") as f:
+                content = f.read()
+
+            # Replace placeholders
+            content = content.replace("{{ cookiecutter.aws_bucket_for_tf_state }}", aws_bucket_for_tf_state)
+            content = content.replace("{{ cookiecutter.aws_dynamodb_lock_table }}", aws_dynamodb_lock_table)
+            content = content.replace("{{ cookiecutter.aws_profile }}", aws_profile)
+            content = content.replace("{{ cookiecutter.aws_region }}", aws_region)
+
+            with open(file_path, "w") as f:
+                f.write(content)
