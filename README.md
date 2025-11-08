@@ -27,13 +27,13 @@ You will be prompted with the following questions:
 ```txt
     [1/9] repo_name (repo_name):
     [2/9] project_name (project_name):
-    [3/9] Select deps_manager
-        1 - pip
-        2 - uv
-        Choose from [1/2] (1):
-    [4/9] Select use_aws
+    [3/9] Select use_aws
         1 - aws
         2 - none
+        Choose from [1/2] (1):
+    [4/9] Select use_kubernetes
+        1 - y
+        2 - n
         Choose from [1/2] (1):
     [5/9] Select use_logging
         1 - y
@@ -74,7 +74,7 @@ git push origin master
 
 ## 🗃️ Repository structure
 
-Assuming you choose the `advance` structure and `uv` as the dependency manager, the repository will look like
+Assuming you choose the `advance` structure, the repository will look like
 something like this:
 
 ```txt

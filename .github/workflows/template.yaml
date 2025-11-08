@@ -28,25 +28,22 @@ jobs:
 
       - name: Execute template
         run: |
-          invoke template --project-manager=pip
-          invoke template --project-manager=uv
+          invoke template
 
       - name: Generated tree structure
         run: |
-          tree -a pip_repo
-          tree -a uv_repo
+          tree -a repo
 
       - name: Upload generated templates
         uses: actions/upload-artifact@v4
         with:
           name: generated-template
           path: |
-            pip_repo
-            uv_repo
+            repo
           include-hidden-files: true
 
-  pip-project:
-    name: Project using pip
+  project:
+    name: Project
     needs: setup
     runs-on: ubuntu-latest
 
@@ -57,10 +54,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: generated-template
-          path: pip_repo
+          path: repo
 
       - name: Artifact structure
-        run: tree -a pip_repo
+        run: tree -a repo
 
       - name: Install conda
         uses: conda-incubator/setup-miniconda@v3
@@ -70,7 +67,7 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          cd pip_repo
+          cd repo
           pip install invoke
           invoke create-environment
           invoke requirements
@@ -80,12 +77,12 @@ jobs:
 
       - name: List all project commands
         run: |
-          cd pip_repo
+          cd repo
           invoke --list
 
       - name: Run project commands
         run: |
-          cd pip_repo
+          cd repo
           invoke preprocess-data
           invoke train
           invoke test
@@ -94,82 +91,21 @@ jobs:
 
       - name: Build documentation
         run: |
-          cd pip_repo
+          cd repo
           invoke build-docs
         env:
           TERM: xterm
 
       - name: Build dockerfiles
         run: |
-          cd pip_repo
+          cd repo
           invoke docker-build
         env:
           TERM: xterm
 
       - name: Check devcontainer
         run: |
-          cd pip_repo
-          npx @devcontainers/cli build --workspace-folder .
-          npx @devcontainers/cli up --workspace-folder .
-        env:
-          TERM: xterm
-
-  uv-project:
-    name: Project using uv
-    needs: setup
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download generated template
-        uses: actions/download-artifact@v4
-        with:
-          name: generated-template-advance
-          path: uv_repo
-
-      - name: Artifact structure
-        run: tree -a uv_repo
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-
-      - name: Install project dependencies
-        run: |
-          cd uv_repo
-          uv sync --all-extras --dev
-
-      - name: List all project commands
-        run: |
-          cd uv_repo
-          uv run invoke --list
-
-      - name: Run project commands
-        run: |
-          cd uv_repo
-          uv run invoke preprocess-data
-          uv run invoke train
-          uv run invoke test
-        env:
-          TERM: xterm
-
-      - name: Build documentation
-        run: |
-          cd uv_repo
-          uv run invoke build-docs
-        env:
-          TERM: xterm
-
-      - name: Build dockerfiles
-        run: |
-          cd uv_repo
-          uv run invoke docker-build
-        env:
-          TERM: xterm
-
-      - name: Check devcontainer
-        run: |
-          cd uv_repo
+          cd repo
           npx @devcontainers/cli build --workspace-folder .
           npx @devcontainers/cli up --workspace-folder .
         env:
