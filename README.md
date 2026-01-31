@@ -79,7 +79,6 @@ something like this:
 │   └── workflows/
 │       ├── linting.yaml
 │       ├── pre-commit-update.yaml
-│       ├── deploy.yaml       # if aws is chosen
 │       └── tests.yaml
 
 ├── configs/                  # Configuration files

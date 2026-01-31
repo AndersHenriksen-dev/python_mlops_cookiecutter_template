@@ -2,8 +2,6 @@
   "repo_name": "repo_name",
   "project_name": "project_name",
   "deps_manager": ["uv", "pip"],
-  "aws_region": "eu-west-1",
-  "use_kubernetes": ["y", "n"],
   "use_logging": ["y", "n"],
   "author_name": "Your name (or your organization/company/team)",
   "description": "A short description of the project.",
