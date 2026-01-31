@@ -37,7 +37,7 @@ You will be prompted with the following questions:
         Choose from [1/2] (1):
     [5/8] author_name (Your name (or your organization/company/team)):
     [6/8] description (A short description of the project.):
-    [7/8] python_version (3.12):
+    [7/8] python_version (3.14):
     [8/8] Select open_source_license
         1 - No license file
         2 - MIT
