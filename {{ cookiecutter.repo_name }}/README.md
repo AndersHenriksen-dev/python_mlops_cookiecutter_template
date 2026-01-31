@@ -97,6 +97,42 @@ You can add these in:
 GitHub → Settings → Secrets and variables → Actions → New repository secret
 
 
+## Installation
+Getting started running code in this project is easy.
+
+1. First, clone the repository:
+    ```bash
+    git clone <<repository_url>>
+    cd {{cookiecutter.repo_name}}
+    ```
+
+{% if cookiecutter.deps_manager == 'uv' %}
+2. This project uses `uv` as dependency manager, make sure you have `uv` installed. You can find installation instructions [here](https://uv.dev/).
+
+3. Then, install the dependencies:
+    ```bash
+    uv sync
+    ```
+{% endif %}
+
+{% if cookiecutter.deps_manager == 'pip' %}
+2. This project uses `pip` as dependency manager with conda. Make sure you have pip installed:
+    ```bash
+    python -m ensurepip --upgrade
+    ```
+3. Also make sure you have [conda](https://docs.conda.io/en/latest/) installed. You can use either [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/products/distribution).
+1. Create a conda environment with the specified python version and activate it:
+    ```bash
+    conda create -n {{cookiecutter.project_name}} python={{cookiecutter.python_version}} -y
+    conda activate {{cookiecutter.project_name}}
+    ```
+2. install the dependencies in the created conda environment:
+    ```bash
+    pip install -r requirements.txt
+    ```
+{% endif %}
+You are now ready to run code in this project!
+
 ## Acknowledgements
 
 Created using [python mlops template](https://github.com/AndersHenriksen-dev/python_mlops_cookiecutter_template),
