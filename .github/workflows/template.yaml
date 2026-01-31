@@ -95,18 +95,3 @@ jobs:
           invoke build-docs
         env:
           TERM: xterm
-
-      - name: Build dockerfiles
-        run: |
-          cd repo
-          invoke docker-build
-        env:
-          TERM: xterm
-
-      - name: Check devcontainer
-        run: |
-          cd repo
-          npx @devcontainers/cli build --workspace-folder .
-          npx @devcontainers/cli up --workspace-folder .
-        env:
-          TERM: xterm

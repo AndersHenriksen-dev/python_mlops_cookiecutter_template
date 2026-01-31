@@ -85,19 +85,11 @@ something like this:
 ├── configs/                  # Configuration files
 ├── logs/                     # Log outputs, if logging is chosen
 ├── data/                     # Data directory
-├── dockerfiles/              # Dockerfiles
-│   ├── api.Dockerfile
-│   └── train.Dockerfile
 ├── docs/                     # Documentation
 │   ├── mkdocs.yml
 │   └── source/
 │       └── index.md
 ├── notebooks/                # Jupyter notebooks
-├── infra/                    # deployment infrastrucure, if aws is chosen
-│   ├── terraform
-│       ├── main.tf
-│       ├── outputs.tf
-│       └── variables.tf
 ├── reports/                  # Reports
 │   └── figures/
 ├── src/                      # Source code
@@ -122,8 +114,6 @@ something like this:
 
 🐍 Python projects using `pyproject.toml`
 
-📦 Containerized using [Docker](https://www.docker.com/)
-
 📄 Documentation with [Material Mkdocs](https://squidfunk.github.io/mkdocs-material/)
 
 👕 Linting and formatting with [ruff](https://docs.astral.sh/ruff/)
@@ -135,10 +125,6 @@ something like this:
 🤖 Automated dependency updates with [Dependabot](https://github.com/dependabot)
 
 📝 Project tasks using [Invoke](https://www.pyinvoke.org/)
-
-☁️ Cloud infrastructure with [AWS](https://aws.amazon.com/)
-
-📜 Infrastructure as code with [Terraform](https://www.terraform.io/)
 
 📝 Logging with standard Python logging or preferred libraries
 

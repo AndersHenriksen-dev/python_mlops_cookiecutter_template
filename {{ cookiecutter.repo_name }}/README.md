@@ -11,25 +11,16 @@ The directory structure of the project looks like this:
 │   └── workflows/
 │       ├── linting.yaml
 │       ├── pre-commit-update.yaml
-│       ├── deploy.yaml       # if aws is chosen
 │       └── tests.yaml
 
 ├── configs/                  # Configuration files
 ├── logs/                     # Log outputs, if logging is chosen
 ├── data/                     # Data directory
-├── dockerfiles/              # Dockerfiles
-│   ├── api.Dockerfile
-│   └── train.Dockerfile
 ├── docs/                     # Documentation
 │   ├── mkdocs.yml
 │   └── source/
 │       └── index.md
 ├── notebooks/                # Jupyter notebooks
-├── infra/                    # deployment infrastrucure, if aws is chosen
-│   ├── terraform
-│       ├── main.tf
-│       ├── outputs.tf
-│       └── variables.tf
 ├── reports/                  # Reports
 │   └── figures/
 ├── src/                      # Source code
@@ -56,10 +47,6 @@ The directory structure of the project looks like this:
 - Pip
 - Git
 - Python
-- Docker and Docker Desktop
-- Terraform (if you want terraform support)
-- Minikube (if you need kubernetes)
-- Kubectl (if you need kubernetes)
 
 ### Git setup
 Some of these settings should always be on to get the best git experience. Others are highly controversial. To learn more, read [this blog](https://blog.gitbutler.com/how-git-core-devs-configure-git).
@@ -104,18 +91,10 @@ To setup git hooks (check commit message setup, only allow rebase to feature-bra
 
 To keep your project secure, you must configure the following GitHub repository secrets:
 - GITHUB_TOKEN
-- TF_API_TOKEN
-- DOCKER_USERNAME
-- DOCKER_PASSWORD
 
 You can add these in:
 
 GitHub → Settings → Secrets and variables → Actions → New repository secret
-
-
-### AWS (Optional)
-If you want to use AWS, you will need to run:
-```aws configure```
 
 
 ## Acknowledgements
