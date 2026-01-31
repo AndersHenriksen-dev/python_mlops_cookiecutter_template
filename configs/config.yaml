@@ -2,7 +2,6 @@ default_context:
     repo_name: "pip_repo"
     project_name: "pip_repo_project"
     deps_manager: "uv"
-    use_aws: "none"
     use_kubernetes: "n"
     use_logging: "y"
     author_name: "John Doe"

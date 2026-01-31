@@ -2,7 +2,6 @@
   "repo_name": "repo_name",
   "project_name": "project_name",
   "deps_manager": ["uv", "pip"],
-  "use_aws": ["aws", "none"],
   "aws_region": "eu-west-1",
   "use_kubernetes": ["y", "n"],
   "use_logging": ["y", "n"],

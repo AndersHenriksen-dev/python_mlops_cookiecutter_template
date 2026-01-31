@@ -1,7 +1,6 @@
 default_context:
     repo_name: "repo_name"
     project_name: "1234project_name"
-    use_aws: "aws"
     use_logging: "y"    
     use_kubernetes: "y"
     author_name: "author_name"
