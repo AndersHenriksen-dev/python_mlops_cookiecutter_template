@@ -36,7 +36,7 @@ if iskeyword(project_name):
     )
 
 min_version = "3.10"
-max_version = "3.13"
+max_version = "3.14"
 if not (ge(python_version, min_version) and le(python_version, max_version)):
     raise ValueError(
         f"Python version must be between {min_version} and {max_version}."
@@ -45,64 +45,27 @@ if not (ge(python_version, min_version) and le(python_version, max_version)):
     )
 
 logger.info("Setting the correct python version in .github/workflows.")
-project_dir = Path.cwd()  # This is the generated project root
 
-workflow_dir = Path(project_dir / ".github" / "workflows")
+# 1. Use the current working directory (the new project)
+project_dir = Path.cwd()
 
-placeholders = {
-    "PLACEHOLDER_FOR_PYTHON_VERSION": "{{ cookiecutter.python_version }}",
-}
+# 2. Safely handle workflows (only if the directory exists)
+workflow_dir = project_dir / ".github" / "workflows"
+if workflow_dir.exists():
+    for file_path in workflow_dir.glob("*.yaml"):
+        text = file_path.read_text()
+        text = text.replace("PLACEHOLDER_FOR_PYTHON_VERSION", python_version)
+        file_path.write_text(text)
 
-for file_path in workflow_dir.glob("*.yaml"):
-    text = file_path.read_text()
-    for key, val in placeholders.items():
-        text = text.replace(key, val)
-    file_path.write_text(text)
-
-
-def replace_in_file(path, replacements) -> None:
-    with open(path, "r") as f:
-        content = f.read()
-
-    for k, v in replacements.items():
-        content = content.replace(k, v)
-
-    with open(path, "w") as f:
-        f.write(content)
-
-
-use_aws = "{{ cookiecutter.use_aws }}"
-project_name = "{{ cookiecutter.project_name }}"
-aws_region = "{{ cookiecutter.aws_region }}"
-
-
-use_aws = use_aws.lower() == "y"
-
-terraform_dir = "infra/terraform"
-if not use_aws:
-    sys.exit()
-
-aws_bucket_for_tf_state = f"{project_name}-tf-state"
-aws_dynamodb_lock_table = f"{project_name}-tf-locks"
-
-for root, _, files in os.walk(terraform_dir):
-    for file in files:
-        if file.endswith(".tf"):
-            file_path = os.path.join(root, file)
-            with open(file_path, "r") as f:
-                content = f.read()
-
-            content = content.replace("AWS_BUCKET_FOR_TF_STATE", aws_bucket_for_tf_state)
-            content = content.replace("AWS_DYNAMODB_LOCK_TABLE", aws_dynamodb_lock_table)
-
-            with open(file_path, "w") as f:
-                f.write(content)
-
-git_hook_path = "python_mlops_cookiecutter_template/{{ cookiecutter.repo_name }}/hooks/pre-merge-commit.sh"
-git_hooks = [
-    Path(git_hook_path/"commit-msg.sh"),
-    Path(git_hook_path/"pre-merge-commit.sh"),
-    Path(git_hook_path/"pre-push.sh"),
-]
-for git_hook in git_hooks:
-    Path.chmod(git_hook, 0o755)
+# 3. Fix the Git Hooks Pathing
+# Hooks should be inside your generated project, e.g., in a 'hooks' folder
+hooks_dir = project_dir / "hooks" 
+if hooks_dir.exists():
+    git_hooks = [
+        hooks_dir / "commit-msg.sh",
+        hooks_dir / "pre-merge-commit.sh",
+        hooks_dir / "pre-push.sh",
+    ]
+    for git_hook in git_hooks:
+        if git_hook.exists():
+            git_hook.chmod(0o755)
