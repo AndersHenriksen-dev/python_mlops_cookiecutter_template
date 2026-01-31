@@ -108,8 +108,18 @@ Getting started running code in this project is easy.
 
 {% if cookiecutter.deps_manager == 'uv' %}
 2. This project uses `uv` as dependency manager, make sure you have `uv` installed. You can find installation instructions [here](https://uv.dev/).
+3. You might have to run the following to make sure uv is installed in path:
+    ```bash
+    uv tool install uv
+    uv tool update-shell
+    ```
+    or
+    ```bash
+    pip install uv
+    uv tool update-shell
+    ```
 
-3. Then, install the dependencies:
+4. Then, install the dependencies:
     ```bash
     uv sync
     ```
