@@ -1,9 +1,8 @@
 default_context:
     repo_name: "repo_name"
     project_name: "project-name"
-    use_aws: "aws"
+    deps_manager: "uv"
     use_logging: "y"
-    use_kubernetes: "y"
     author_name: "author_name"
     description: "description"
     python_version: "3.11"

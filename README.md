@@ -25,24 +25,20 @@ cookiecutter https://github.com/AndersHenriksen-dev/python_mlops_cookiecutter_te
 You will be prompted with the following questions:
 
 ```txt
-    [1/9] repo_name (repo_name):
-    [2/9] project_name (project_name):
-    [3/9] Select deps_manager
+    [1/8] repo_name (repo_name):
+    [2/8] project_name (project_name):
+    [3/8] Select deps_manager
         1 - uv
         2 - pip
         Choose from [1/2] (1):
-    [4/9] Select use_kubernetes
+    [4/8] Select use_logging
         1 - y
         2 - n
         Choose from [1/2] (1):
-    [5/9] Select use_logging
-        1 - y
-        2 - n
-        Choose from [1/2] (1):
-    [6/9] author_name (Your name (or your organization/company/team)):
-    [7/9] description (A short description of the project.):
-    [8/9] python_version (3.12):
-    [9/9] Select open_source_license
+    [5/8] author_name (Your name (or your organization/company/team)):
+    [6/8] description (A short description of the project.):
+    [7/8] python_version (3.12):
+    [8/8] Select open_source_license
         1 - No license file
         2 - MIT
         3 - BSD-3-Clause
