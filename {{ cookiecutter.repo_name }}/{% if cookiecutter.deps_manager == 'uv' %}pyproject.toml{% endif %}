@@ -17,16 +17,20 @@ classifiers = [
 readme = "README.md"
 requires-python = ">={{ cookiecutter.python_version }}"
 dependencies = [
-    "coverage==7.8.0",
-    "invoke==2.2.0",
-    "mkdocs==1.6.1",
-    "mkdocs-material==9.6.1",
-    "mkdocstrings-python==1.16.10",
-    "pre-commit==4.1.0",
-    "pytest==8.3.4",
-    "ruff==0.11.6",
-    "setuptools>=61.0",
+    "coverage",
+    "mkdocs-include-markdown-plugin",
+    "mkdocstrings[python]",
+    "invoke",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings",
+    "mkdocstrings-python",
+    "pre-commit",
+    "pytest",
+    "ruff",
+    "setuptools",
     "wheel",
+    "toc",
 ]
 
 [tool.ruff]
