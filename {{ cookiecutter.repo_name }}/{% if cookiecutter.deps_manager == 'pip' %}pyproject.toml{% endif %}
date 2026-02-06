@@ -24,6 +24,13 @@ dependencies = {file = ["requirements.txt"]}
 [tool.setuptools.dynamic.optional-dependencies]
 dev = {file = ['requirements_dev.txt']}
 
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = { find = { include = ["{{cookiecutter.project_name}}", "{{cookiecutter.project_name}}.*"], exclude = [] } }
+
 [tool.ruff]
 line-length = 120
 
