@@ -1,3 +1,5 @@
+"""Show how to use the logging utils in a script."""
+
 {% if cookiecutter.use_logging == "y" %}from utils.logging import (
     get_logger,
     log_function_execution,
@@ -9,7 +11,7 @@ logger = get_logger(__name__)
 
 @log_function_execution
 def main():
-
+    """Show simple script you can run."""
     setup_logging("")
 
     log = get_logger(__name__)
@@ -21,9 +23,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main(){% else %}
+    main()
+{% else %}
 def main():
+    """Show simple script you can run."""
     print("Hello world!")
 
 if __name__ == "__main__":
-    main(){% endif %}
+    main()
+{% endif %}

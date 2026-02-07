@@ -38,6 +38,7 @@ def test_wrong_config3(tmpdir):
             output_dir=str(tmpdir),
         )
 
+
 def test_wrong_config4(tmpdir):
     with pytest.raises(FailedHookException):
         cookiecutter(

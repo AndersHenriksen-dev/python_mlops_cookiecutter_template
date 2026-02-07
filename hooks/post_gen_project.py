@@ -8,6 +8,7 @@ try:
     from loguru import logger
 except ImportError:
     import logging
+
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
     handler = logging.StreamHandler()
@@ -59,7 +60,7 @@ if workflow_dir.exists():
 
 # 3. Fix the Git Hooks Pathing
 # Hooks should be inside your generated project, e.g., in a 'hooks' folder
-hooks_dir = project_dir / "hooks" 
+hooks_dir = project_dir / "hooks"
 if hooks_dir.exists():
     git_hooks = [
         hooks_dir / "commit-msg.sh",

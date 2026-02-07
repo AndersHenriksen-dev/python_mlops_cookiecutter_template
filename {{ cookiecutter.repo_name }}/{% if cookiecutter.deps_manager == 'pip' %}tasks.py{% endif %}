@@ -1,3 +1,5 @@
+"""Provide utility functions to create documentation."""
+
 import os
 
 from invoke import Context, task
@@ -5,6 +7,7 @@ from invoke import Context, task
 WINDOWS = os.name == "nt"
 PROJECT_NAME = "{{ cookiecutter.project_name }}"
 PYTHON_VERSION = "{{ cookiecutter.python_version }}"
+
 
 # Setup commands
 @task
@@ -15,6 +18,7 @@ def create_environment(ctx: Context) -> None:
         echo=True,
         pty=not WINDOWS,
     )
+
 
 @task
 def requirements(ctx: Context) -> None:

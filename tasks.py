@@ -6,6 +6,7 @@ def template(ctx: Context) -> None:
     """Create a new project from the template."""
     ctx.run("cookiecutter -f --config-file configs/advance_config.yaml --no-input --verbose .")
 
+
 @task
 def requirements(ctx: Context) -> None:
     """Install project requirements."""
