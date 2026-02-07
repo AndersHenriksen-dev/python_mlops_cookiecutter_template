@@ -1,4 +1,19 @@
 {
+    // Try to set Bash as default for Linux/Mac
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.defaultProfile.osx": "bash",
+
+    // For Windows, it's trickier. "Git Bash" is the standard name.
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+
+    // Optional: If you want to be safe, define what "bash" actually is
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+        }
+    },
+
     "workbench.iconTheme": "vscode-icons",
     "explorer.copyRelativePathSeparator": "/",
     "[python]": {
@@ -16,7 +31,6 @@
     "flake8.args": ["--max-line-length=120"],
     "editor.inlineSuggest.enabled": true,
     "security.workspace.trust.untrustedFiles": "open",
-    "terminal.integrated.defaultProfile.windows": "Git Bash",
 
     "terminal.integrated.scrollback": 5000,
     "editor.minimap.enabled": false,
