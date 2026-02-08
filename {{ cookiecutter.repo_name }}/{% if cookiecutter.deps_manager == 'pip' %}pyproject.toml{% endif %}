@@ -53,6 +53,7 @@ select = [
     "RUF",  # Ruff-specific rules
     "D",    # pydocstyle (docstring conventions)
     "DOC",  # docstring rules
+    "S",    # flake8-string-format (string formatting issues)
 ]
 
 # Rules to ignore (customize as needed)
@@ -73,7 +74,7 @@ split-on-trailing-comma = true # Split imports on trailing comma
 
 # Mypy configuration: type checking
 [tool.mypy]
-python_version = "3.13" # Target Python version
+python_version = "{{ cookiecutter.python_version }}" # Target Python version
 strict = true           # Enable all strict type checking options
 
 # Import handling

@@ -123,6 +123,13 @@ Getting started running code in this project is easy.
     ```bash
     uv sync
     ```
+
+5. Restart your vscode instance. This should activate the environment automatically in the console and in vscode.
+
+6. If you want to use pre-commit hooks, you have to install them with the following command:
+    ```bash
+    pre-commit install --hook-type pre-commit --hook-type commit-msg
+    ```
 {% endif %}
 
 {% if cookiecutter.deps_manager == 'pip' %}
@@ -131,14 +138,21 @@ Getting started running code in this project is easy.
     python -m ensurepip --upgrade
     ```
 3. Also make sure you have [conda](https://docs.conda.io/en/latest/) installed. You can use either [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/products/distribution).
-1. Create a conda environment with the specified python version and activate it:
+4. Create a conda environment with the specified python version and activate it:
     ```bash
     conda create -n {{cookiecutter.project_name}} python={{cookiecutter.python_version}} -y
     conda activate {{cookiecutter.project_name}}
     ```
-2. install the dependencies in the created conda environment:
+5. install the dependencies in the created conda environment:
     ```bash
     pip install -r requirements.txt
+    ```
+
+6. Restart your vscode instance. This should activate the environment automatically in the console and in vscode.
+
+7. If you want to use pre-commit hooks, you have to install them with the following command:
+    ```bash
+    pre-commit install --hook-type pre-commit --hook-type commit-msg
     ```
 {% endif %}
 You are now ready to run code in this project!

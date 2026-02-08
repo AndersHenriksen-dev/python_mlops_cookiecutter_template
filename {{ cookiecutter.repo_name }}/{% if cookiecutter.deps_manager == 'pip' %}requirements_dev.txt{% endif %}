@@ -10,6 +10,10 @@ coverage
 
 # linting
 ruff
+mypy
+bandit
+safety
+pre-commit
 
 # docs
 mkdocs

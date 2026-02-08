@@ -14,11 +14,46 @@
         }
     },
 
+    "workbench.tree.indent": 40,
+    "workbench.tree.renderIndentGuides": "always",
+    "editor.guides.bracketPairs": "active",
+    "workbench.editor.enablePreview": false,
+    "terminal.integrated.focusAfterLaunch": true,
+    "workbench.colorCustomizations": {
+        "tree.indentGuidesStroke": "#ffffff"
+    },
+
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+
+    // Show the full path including the file and the specific function name
+    "breadcrumbs.enabled": true,
+
+    // Show icons (like the 'Function' or 'Class' icon) for better scanning
+    "breadcrumbs.icons": true,
+
+    // "Focus" breadcrumbs with a shortcut (standard is Ctrl+Shift+.)
+    // This lets you navigate the file structure without your mouse.
+    "breadcrumbs.filePath": "on",
+
+    // Determines how symbols are sorted in the breadcrumb dropdown
+    "breadcrumbs.symbolSortOrder": "type",
+
+    // Instantly find symbols (methods/variables) without scrolling
+    "editor.gotoLocation.multipleDefinitions": "goto",
+    "editor.gotoLocation.multipleDeclarations": "goto",
+    "editor.gotoLocation.multipleImplementations": "goto",
+
+    // Sticky Scroll: Keeps the function/class header at the top as you scroll
+    "editor.stickyScroll.enabled": true,
+    "editor.stickyScroll.maxLineCount": 5,
+
     "workbench.iconTheme": "vscode-icons",
     "explorer.copyRelativePathSeparator": "/",
     "python.terminal.activateEnvInCurrentTerminal": true,
     "[python]": {
         "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
         "editor.codeActionsOnSave": {
         "source.fixAll.ruff": "always",
         "source.organizeImports.ruff": "always"

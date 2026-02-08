@@ -72,5 +72,19 @@
         "key": "ctrl+alt+r", // Choose your preferred shortcut
         "command": "workbench.action.tasks.runTask",
         "args": "Python: Run current file as module"
+    },
+       {
+        "key": "ctrl+alt+right",
+        "command": "-workbench.action.moveEditorToNextGroup"
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "editor.gotoNextSymbolFromResult",
+        "when": "hasSymbols"
+    },
+    {
+        "key": "f12",
+        "command": "-editor.gotoNextSymbolFromResult",
+        "when": "hasSymbols"
     }
 ]
