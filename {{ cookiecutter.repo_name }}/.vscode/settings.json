@@ -49,6 +49,7 @@
     "editor.stickyScroll.maxLineCount": 5,
 
     "workbench.iconTheme": "vscode-icons",
+    "explorer.copyPathSeparator": "/",
     "explorer.copyRelativePathSeparator": "/",
     "python.terminal.activateEnvInCurrentTerminal": true,
     "[python]": {
